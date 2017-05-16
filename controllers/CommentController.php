@@ -7,11 +7,17 @@
  * Time: 11:38
  */
 
+use Comments\models\Message;
+
 class CommentController
 {
     public function actionIndex()
     {
-        echo 'comment/index';
+        $message = new Message();
+
+        $messages = $message->findAll();
+
+        require_once ROOT . '/views/index.php';
 
         return true;
     }

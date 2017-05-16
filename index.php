@@ -13,6 +13,4 @@ error_reporting(E_ALL);
 
 define('ROOT', dirname(__FILE__));
 
-Comments\config\DataBase::getConnection();
-
 (new \Comments\components\Router())->run();

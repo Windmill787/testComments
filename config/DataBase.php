@@ -10,7 +10,21 @@ namespace Comments\config;
 
 class DataBase
 {
-    protected static $instance = null;
+    protected static $instance;
+
+    public static function getConnection()
+    {
+        if (!isset(static::$instance)) {
+            $params = include_once 'params-local.php';
+            return static::$instance = new \mysqli(
+                $params['host'],
+                $params['username'],
+                $params['passwd'],
+                $params['dbname']
+            );
+        }
+        return static::$instance;
+    }
 
     protected function __construct()
     {
@@ -20,19 +34,5 @@ class DataBase
     protected function __clone()
     {
 
-    }
-
-    public static function getConnection()
-    {
-        if (!isset(static::$instance)) {
-            $params = include_once 'params-local.php';
-            static::$instance = new \mysqli(
-                $params['host'],
-                $params['username'],
-                $params['passwd'],
-                $params['dbname']
-            );
-        }
-        return static::$instance;
     }
 }
