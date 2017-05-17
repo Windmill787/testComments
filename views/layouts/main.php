@@ -19,6 +19,13 @@
 <a href="/signup">Signup</a>
 <a href="/logout">Logout</a>
 
+<?php
+if (isset($_SESSION['user'])) {
+    echo 'logged in as ' . $_SESSION['user']['username'];
+    echo '<a href="/create">Create</a>';
+}
+?>
+
 <div class="alert alert-danger">
     <?php if (empty($alert) == false) {
         echo $alert;

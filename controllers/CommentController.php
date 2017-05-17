@@ -35,7 +35,31 @@ class CommentController
 
     public function actionCreate()
     {
-        echo 'comment/create';
+        $alert = '';
+
+        if (isset($_POST['submit'])) {
+
+            if (trim($_POST['content']) == '') {
+                $alert = 'Enter content';
+            }
+
+            if (empty($alert)) {
+
+                $comment = new Message();
+
+                $comment->insert([
+                    'author' => $_SESSION['user']['id'],
+                    'content' => $_POST['content'],
+                    'date' => date("Y-m-d H:i:s")
+                ]);
+            }
+        }
+
+        $title = 'Create comment';
+
+        $view = ROOT . '/views/comment/create.php';
+
+        require_once ROOT . '/views/layouts/main.php';
 
         return true;
     }

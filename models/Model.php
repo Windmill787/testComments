@@ -16,6 +16,8 @@ class Model
 
     function __construct() {
 
+        DataBase::getConnection();
+
         if (empty($this->tableName)) {
 
             $className = explode('\\', get_class($this));
