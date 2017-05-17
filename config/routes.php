@@ -7,8 +7,10 @@
  */
 
 return [
-    'comment/update/([0-9]+)' => 'comment/update/$1',
-    'comment/delete/([0-9]+)' => 'comment/delete/$1',
-    'comment/create' => 'comment/create',
-    'comment' => 'comment/index',
+    'update/([0-9]+)' => 'comment/update/$1',
+    'delete/([0-9]+)' => 'comment/delete/$1',
+    'create' => 'comment/create',
+    'index' => 'comment/index',
+    'login' => 'site/login',
+    'signup' => 'site/signup'
 ];

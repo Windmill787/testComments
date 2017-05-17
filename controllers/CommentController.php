@@ -17,7 +17,11 @@ class CommentController
 
         $messages = $message->findAll();
 
-        require_once ROOT . '/views/index.php';
+        $title = 'Commentaries';
+
+        $view = ROOT . '/views/comment/index.php';
+
+        require_once ROOT . '/views/layouts/main.php';
 
         return true;
     }
