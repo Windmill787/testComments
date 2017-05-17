@@ -23,9 +23,6 @@
             <input type="password" class="form-control"
                    id="pwd" name="repeat_password" value="<?= @$_POST['repeat_password'] ?>">
         </div>
-        <div class="checkbox">
-            <label><input type="checkbox"> Remember me</label>
-        </div>
         <button type="submit" class="btn btn-default" name="submit">Submit</button>
     </form>
 

@@ -19,5 +19,8 @@
         </div>
         <?php
     }
+    if (isset($_SESSION['user'])) {
+        echo 'logged in ' . $_SESSION['user']['username'];
+    }
     ?>
 </div>

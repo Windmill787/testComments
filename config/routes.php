@@ -12,5 +12,6 @@ return [
     'create' => 'comment/create',
     'index' => 'comment/index',
     'login' => 'site/login',
-    'signup' => 'site/signup'
+    'signup' => 'site/signup',
+    'logout' => 'site/logout'
 ];

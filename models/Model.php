@@ -65,6 +65,35 @@ class Model
     }
 
     /**
+     * @param $data1 array
+     * @param $data2 array
+     *
+     * @return array
+     */
+    public function findTwo($data1, $data2) {
+
+        $db = DataBase::getConnection();
+
+        $key1 = array_keys($data1);
+
+        $value1 = array_values($data1);
+
+        $key2 = array_keys($data2);
+
+        $value2 = array_values($data2);
+
+        $query = "SELECT * FROM $this->tableName 
+                  WHERE " . implode(', ' , $key1) . " = 
+                  '". implode("', '" , $value1) . "' 
+                  AND WHERE " . implode(', ' , $key2) . " = 
+                  '". implode("', '" , $value2) . "'";
+
+        $result = $db->query($query)->fetch_assoc();
+
+        return $result;
+    }
+
+    /**
      * @return array
      */
     public function findAll() {

@@ -15,6 +15,7 @@ class DataBase
     public static function getConnection()
     {
         if (!isset(static::$instance)) {
+            session_start();
             $params = include_once 'params-local.php';
             return static::$instance = new \mysqli(
                 $params['host'],
