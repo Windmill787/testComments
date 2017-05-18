@@ -124,4 +124,31 @@ class Model
 
         return $result;
     }
+
+    public function update($data, $id) {
+
+        $db = DataBase::getConnection();
+
+        $key = array_keys($data);
+
+        $value = array_values($data);
+
+        $query = "UPDATE $this->tableName SET " . implode(', ' , $key) . " 
+                    = '". implode("', '" , $value) . "' WHERE `id`=".$id;
+
+        $result = $db->query($query);
+
+        return $result;
+    }
+
+    public function delete($id) {
+
+        $db = DataBase::getConnection();
+
+        $query = "DELETE FROM $this->tableName WHERE `id`=".$id;
+
+        $result = $db->query($query);
+
+        return $query;
+    }
 }

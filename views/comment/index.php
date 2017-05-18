@@ -14,6 +14,8 @@
                         echo $item."<br>";
                     }
                     ?>
+                    <a href="/update/<?= $message[0] ?>">Update</a>
+                    <a href="/delete/<?= $message[0] ?>">Delete</a>
                 </div>
             </div>
         </div>

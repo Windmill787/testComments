@@ -28,7 +28,31 @@ class CommentController
 
     public function actionUpdate($id)
     {
-        echo 'comment/update';
+        $comment = new Message();
+
+        $message = $comment->findById($id);
+
+        $alert = '';
+
+        if (isset($_POST['submit'])) {
+
+            if (trim($_POST['content']) == '') {
+                $alert = 'Enter content';
+            }
+
+            if (empty($alert)) {
+                $comment->update([
+                    'content' => $_POST['content']
+                ], $id);
+                header('Location: /index');
+            }
+        }
+
+        $title = 'Update comment';
+
+        $view = ROOT . '/views/comment/update.php';
+
+        require_once ROOT . '/views/layouts/main.php';
 
         return true;
     }
@@ -66,15 +90,12 @@ class CommentController
 
     public function actionDelete($id)
     {
-        echo 'comment/delete';
+        $comment = new Message();
 
-        return true;
-    }
+        $comment->findById($id);
 
-    public function actionView($id)
-    {
-        echo 'comment/view';
+        $comment->delete($id);
 
-        return true;
+        header('Location: /index');
     }
 }
