@@ -10,5 +10,5 @@ return [
     'host' => 'localhost',
     'dbname' => 'comments',
     'username' => 'root',
-    'passwd' => 'crosshairsilverstyle13hfp'
+    'passwd' => ''
 ];
