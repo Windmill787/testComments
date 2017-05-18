@@ -8,6 +8,10 @@
 
         <?php include $create ?>
 
+    <?php } else { ?>
+
+        <p>To create comment you must <a href="/login">Login</a></p>
+
     <?php } ?>
 
     <?php foreach ($messages as $message) { ?>
