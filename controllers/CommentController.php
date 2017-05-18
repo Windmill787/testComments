@@ -21,6 +21,31 @@ class CommentController
 
         $view = ROOT . '/views/comment/index.php';
 
+        $create = 'create.php';
+
+        $alert = '';
+
+        if (isset($_POST['submit']) && isset($_POST['content'])) {
+
+            if (trim($_POST['content']) == '') {
+                $alert = 'Enter content';
+            }
+
+            if (empty($alert)) {
+
+                $comment = new Message();
+
+                $comment->insert([
+                    'author' => $_SESSION['user']['id'],
+                    'content' => $_POST['content'],
+                    'date' => date("Y-m-d H:i:s"),
+                    'parent_id' => 0
+                ]);
+
+                header('Location: /index');
+            }
+        }
+
         require_once ROOT . '/views/layouts/main.php';
 
         return true;
@@ -42,7 +67,8 @@ class CommentController
                 $alert = 'Enter content';
             }
 
-            if (empty($alert)) {
+            if (empty($alert) && $message['author'] == $_SESSION['user']['id']) {
+
                 $comment->update([
                     'content' => $_POST['content']
                 ], $id);
@@ -59,48 +85,16 @@ class CommentController
         return true;
     }
 
-    public function actionCreate()
-    {
-        Comments\config\DataBase::getConnection();
-
-        $alert = '';
-
-        if (isset($_POST['submit'])) {
-
-            if (trim($_POST['content']) == '') {
-                $alert = 'Enter content';
-            }
-
-            if (empty($alert)) {
-
-                $comment = new Message();
-
-                $comment->insert([
-                    'author' => $_SESSION['user']['id'],
-                    'content' => $_POST['content'],
-                    'date' => date("Y-m-d H:i:s")
-                ]);
-                header('Location: /index');
-            }
-        }
-
-        $title = 'Create comment';
-
-        $view = ROOT . '/views/comment/create.php';
-
-        require_once ROOT . '/views/layouts/main.php';
-
-        return true;
-    }
-
     public function actionDelete($id)
     {
         $comment = new Message();
 
-        $comment->findById($id);
+        $message = $comment->findById($id);
 
-        $comment->delete($id);
+        if ($message['author'] == $_SESSION['user']['id']) {
+            $comment->delete($id);
 
-        header('Location: /index');
+            header('Location: /index');
+        }
     }
 }

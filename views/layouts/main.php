@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title><?= $title ?></title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/script.js"></script>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -53,11 +54,11 @@
     </div>
 </nav>
 
-<div class="alert alert-danger">
-    <?php if (empty($alert) == false) {
-        echo $alert;
-    } ?>
-</div>
+<?php if (empty($alert) == false) {
+    echo '<div class="alert alert-danger">';
+    echo $alert;
+    echo '</div>';
+} ?>
 
 <?php include $view; ?>
 

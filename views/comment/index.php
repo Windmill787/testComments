@@ -4,7 +4,9 @@
 
     <?php if (isset($_SESSION['user'])) { ?>
 
-        <a href="/create">Create</a>
+        <a href="#" onclick="show()">Create</a>
+
+        <?php include $create ?>
 
     <?php } ?>
 
@@ -25,10 +27,11 @@
 
                     <?php if (isset($_SESSION['user']) && $_SESSION['user']['id'] == $message[1]) { ?>
 
-                    <a href="/update/<?= $message[0] ?>">Update</a> |
-                    <a href="/delete/<?= $message[0] ?>" onClick="return window.confirm('Do you want to delete this item?')">Delete</a>
+                        <a href="/update/<?= $message[0] ?>">Update</a> |
+                        <a href="/delete/<?= $message[0] ?>" onClick="return window.confirm('Do you want to delete this item?')">Delete</a>
 
                     <?php } ?>
+
                 </div>
             </div>
         </div>
