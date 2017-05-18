@@ -10,6 +10,8 @@ class SiteController
 {
     public function actionLogin()
     {
+        Comments\config\DataBase::getConnection();
+
         $alert = '';
 
         if (isset($_POST['submit'])) {
@@ -50,6 +52,8 @@ class SiteController
 
     public function actionSignup()
     {
+        Comments\config\DataBase::getConnection();
+
         $alert = '';
 
         if (isset($_POST['submit'])) {
@@ -88,11 +92,15 @@ class SiteController
             }
 
             if (empty($alert)) {
-                (new \Comments\models\User())->insert([
+                $user->insert([
                     'username' => $_POST['username'],
                     'email' => $_POST['email'],
                     'password_hash' => password_hash($_POST['password'], PASSWORD_DEFAULT)
                 ]);
+                $loginUser = $user->find([
+                    'username' => $_POST['username']
+                ]);
+                $_SESSION['user'] = $loginUser;
                 header('Location: /index');
             }
         }

@@ -102,7 +102,7 @@ class Model
 
         $db = DataBase::getConnection();
 
-        $query = "SELECT * FROM $this->tableName";
+        $query = "SELECT * FROM $this->tableName ORDER BY `id` DESC";
 
         $result = $db->query($query)->fetch_all();
 

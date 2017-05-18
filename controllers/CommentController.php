@@ -28,6 +28,8 @@ class CommentController
 
     public function actionUpdate($id)
     {
+        Comments\config\DataBase::getConnection();
+
         $comment = new Message();
 
         $message = $comment->findById($id);
@@ -59,6 +61,8 @@ class CommentController
 
     public function actionCreate()
     {
+        Comments\config\DataBase::getConnection();
+
         $alert = '';
 
         if (isset($_POST['submit'])) {
@@ -76,6 +80,7 @@ class CommentController
                     'content' => $_POST['content'],
                     'date' => date("Y-m-d H:i:s")
                 ]);
+                header('Location: /index');
             }
         }
 

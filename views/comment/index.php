@@ -1,6 +1,13 @@
 <div class="col-md-6 col-md-offset-3">
 
     <h1><small><?= $title ?></small></h1>
+
+    <?php if (isset($_SESSION['user'])) { ?>
+
+        <a href="/create">Create</a>
+
+    <?php } ?>
+
     <?php foreach ($messages as $message) { ?>
         <div class="thumbnail">
             <div class="caption comment clearfix">
@@ -10,12 +17,18 @@
 
                 <div class="text-justify text">
                     <?php
-                    foreach ($message as $item) {
-                        echo $item."<br>";
-                    }
+                    $author = new \Comments\models\User();
+                    $authorName = $author->findById($message[1]);
+                    echo "<p>".$authorName['username']."<span class='pull-right'>".$message[3]."</span></p>".'<br>';
+                    echo "<p>".$message[2]."</p>".'<br>';
                     ?>
-                    <a href="/update/<?= $message[0] ?>">Update</a>
-                    <a href="/delete/<?= $message[0] ?>">Delete</a>
+
+                    <?php if (isset($_SESSION['user']) && $_SESSION['user']['id'] == $message[1]) { ?>
+
+                    <a href="/update/<?= $message[0] ?>">Update</a> |
+                    <a href="/delete/<?= $message[0] ?>" onClick="return window.confirm('Do you want to delete this item?')">Delete</a>
+
+                    <?php } ?>
                 </div>
             </div>
         </div>

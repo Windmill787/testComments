@@ -12,19 +12,46 @@
 </head>
 <body>
 
-<a href="/index">Home</a>
-<a href="/create">Create</a>
-<a href="/view?id=1">View</a>
-<a href="/login">Login</a>
-<a href="/signup">Signup</a>
-<a href="/logout">Logout</a>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/index">Home</a>
+        </div>
 
-<?php
-if (isset($_SESSION['user'])) {
-    echo 'logged in as ' . $_SESSION['user']['username'];
-    echo '<a href="/create">Create</a>';
-}
-?>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+
+                <?php if (isset($_SESSION['user']) == false) { ?>
+
+                <li>
+                    <a href="/login">Login</a>
+                </li>
+
+                <?php } ?>
+
+                <li>
+                    <a href="/signup">Signup</a>
+                </li>
+
+                <?php if (isset($_SESSION['user'])) { ?>
+
+                    <li>
+                        <a href="/logout" onClick="return window.confirm('Do you want to logout?')">Logout (<?= $_SESSION['user']['username'] ?>)</a>
+                    </li>
+
+                <?php } ?>
+
+                <li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <div class="alert alert-danger">
     <?php if (empty($alert) == false) {
